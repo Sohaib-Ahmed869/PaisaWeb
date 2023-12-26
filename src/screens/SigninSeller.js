@@ -12,20 +12,20 @@ import { EffectCoverflow, Autoplay } from "swiper";
 const URL = process.env.REACT_APP_BACKEND_URL;
 const Signin = () => {
 
-    const [name, setName] = useState('');
+    const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
 
     const submitHandler = async (e) => {
-        console.log (name, email);
+        console.log (password, email);
         try {
             
-            const response = await fetch(`${URL}/seller/signin`, {
+            const response = await fetch(`${URL}/user/signin/seller`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    name, email
+                    password, email
                 })
             });
 
@@ -33,7 +33,7 @@ const Signin = () => {
             console.log(responseData);
         }
         catch (err) {
-            console.log(err);
+            console.log(err, 'error');
         }
     }
 
@@ -59,7 +59,7 @@ const Signin = () => {
                                     </Col>
                                     <Col lg={6} className="mb-3">
                                         <label className="form-label">Password</label>
-                                        <input type="password" className="form-control" placeholder="Enter Your Password" onChange={(e) => setName(e.target.value)} />
+                                        <input type="password" className="form-control" placeholder="Enter Your Password" onChange={(e) => setPassword(e.target.value)} />
                                     </Col>
                                     <Col lg={12} className="mb-3">
                                         <div className="d-flex justify-content-between">
