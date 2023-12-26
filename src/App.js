@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState } from 'react';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import AdminLogin from './components/AdminLogin';
+import BlockSeller from './components/BlockSeller';
+import OrderStatus from './components/OrderStatus';
+import ProductApproval from './components/ProductApproval';
+import BlockCustomer from './components/blockCustomer';
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/login/admin" element={<AdminLogin setIsLoggedIn={setIsLoggedIn} />} />
+        <Route path="/admin/unapproved-products" element={<ProductApproval />} />
+        <Route path="/admin/customers" element={<BlockCustomer />} />
+        <Route path="/admin/sellers" element={<BlockSeller />} />
+        <Route path="/admin/pending-orders" element={<OrderStatus />} />
+      </Routes>
+    </Router>
   );
 }
 
