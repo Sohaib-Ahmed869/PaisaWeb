@@ -31,6 +31,8 @@ const Signin = () => {
 
             const responseData = await response.json();
             console.log(responseData);
+            //save token in local storage
+            localStorage.setItem('token', responseData.token);
         }
         catch (err) {
             console.log(err, 'error');
