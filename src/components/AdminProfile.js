@@ -1,6 +1,6 @@
-// AdminProfile.js
+
 import React, { useEffect, useState } from 'react';
-import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
+import { Alert, Button, Card, Col, Container, Form, Row } from 'react-bootstrap'; // Import Alert from react-bootstrap
 
 const AdminProfile = () => {
   const [admin, setAdmin] = useState({});
@@ -10,25 +10,27 @@ const AdminProfile = () => {
     password: '',
     dob: '',
   });
+  const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(() => {
     // Fetch admin profile data
     const fetchAdminProfile = async () => {
-        try {
-          const adminId = localStorage.getItem('adminId'); // Assuming you store the admin ID in localStorage after login
-      
-          const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/admin/profile/${adminId}`, {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-          });
-      
-          const adminData = await response.json();
-          setAdmin(adminData);
-        } catch (error) {
-          console.error('Error fetching admin profile:', error);
-        }
-      };
+      try {
+        const adminId = localStorage.getItem('adminId');
+
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/admin/profile/${adminId}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+
+        const adminData = await response.json();
+        setAdmin(adminData);
+      } catch (error) {
+        console.error('Error fetching admin profile:', error);
+      }
+    };
+
     fetchAdminProfile();
   }, []);
 
@@ -43,7 +45,6 @@ const AdminProfile = () => {
     e.preventDefault();
 
     try {
-      // Update admin profile
       const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/admin/edit-profile/${admin._id}`, {
         method: 'PUT',
         headers: {
@@ -53,26 +54,33 @@ const AdminProfile = () => {
         body: JSON.stringify(formData),
       });
 
-      const updatedAdmin = await response.json();
-      setAdmin(updatedAdmin);
+      if (response.ok) {
+        const updatedAdmin = await response.json();
+        setAdmin(updatedAdmin);
+        setSuccessMessage('Profile updated successfully'); // Set success message
+      } else {
+        console.error('Failed to update admin profile');
+        setSuccessMessage(''); // Clear success message
+      }
     } catch (error) {
       console.error('Error updating admin profile:', error);
+      setSuccessMessage(''); // Clear success message
     }
   };
 
   return (
     <Container className="mt-4">
       <Row className="justify-content-md-center">
-      <Col lg={4} style={{marginTop:'40px'}}>
-                        <div className="home-content mt-4">
-                            <h1 className="title">Admin Profile</h1>
-                            <p className="subtitle">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                        </div>
-                    </Col>
+        <Col lg={4} style={{ marginTop: '40px' }}>
+          <div className="home-content mt-4">
+            <h1 className="title">Admin Profile</h1>
+            <p className="subtitle">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+          </div>
+        </Col>
         <Col md={8}>
           <Card>
             <Card.Body>
-              
+              {successMessage && <Alert variant="success">{successMessage}</Alert>} {/* Display success message */}
               <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formName">
                   <Form.Label>Name</Form.Label>
@@ -116,7 +124,6 @@ const AdminProfile = () => {
                     onChange={handleChange}
                   />
                 </Form.Group>
-
                 <Button variant="primary" type="submit">
                   Update Profile
                 </Button>
