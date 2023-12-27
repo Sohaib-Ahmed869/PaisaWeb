@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { Button, Col, Container, Row, Table } from 'react-bootstrap';
+
 const URL = process.env.REACT_APP_BACKEND_URL;
-const AdminDashboard = () => {
+
+const UnapprovedProducts = () => {
   const [unapprovedProducts, setUnapprovedProducts] = useState([]);
   const token = localStorage.getItem('token');
-  
+
   useEffect(() => {
     const fetchUnapprovedProducts = async () => {
       try {
@@ -11,11 +14,10 @@ const AdminDashboard = () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         });
-        console.log(token);
-        console.log(response);
+
         if (response.ok) {
           const data = await response.json();
           setUnapprovedProducts(data);
@@ -25,7 +27,6 @@ const AdminDashboard = () => {
         }
       } catch (error) {
         console.error('Error fetching unapproved products:', error);
-        
       }
     };
 
@@ -34,17 +35,19 @@ const AdminDashboard = () => {
 
   const handleApproveClick = async (productId) => {
     try {
-      const response = await fetch(`${URL}/admin/approve-product/${productId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
-        },
-        body: JSON.stringify({ approval: true }),
-      });
+      const response = await fetch(
+        `${URL}/admin/approve-product/${productId}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+          body: JSON.stringify({ approval: true }),
+        }
+      );
 
       if (response.ok) {
-     
         setUnapprovedProducts((prevProducts) =>
           prevProducts.filter((product) => product._id !== productId)
         );
@@ -58,19 +61,49 @@ const AdminDashboard = () => {
 
   return (
     <div>
-      <h2>Unapproved Products</h2>
-      <ul>
-        {unapprovedProducts.map((product) => (
-          <li key={product._id}>
-            {product.name} - {product.approval ? 'Approved' : 'Not Approved'}
-            <button onClick={() => handleApproveClick(product._id)}>
-              Approve
-            </button>
-          </li>
-        ))}
-      </ul>
+      <React.Fragment>
+        <Container>
+          <Row>
+            <Col md={8} lg={8}></Col>
+            <Col md={8} style={{ marginTop: '50px' }}>
+              <h2>Unapproved Products</h2>
+              {unapprovedProducts.length === 0 ? (
+                <p>No products</p>
+              ) : (
+                <Table striped bordered hover>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {unapprovedProducts.map((product) => (
+                      <tr key={product._id}>
+                        <td>{product.name}</td>
+                        <td>
+                          {product.approval ? 'Approved' : 'Not Approved'}
+                        </td>
+                        <td>
+                          <Button
+                            variant="success"
+                            onClick={() => handleApproveClick(product._id)}
+                          >
+                            Approve
+                          </Button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              )}
+            </Col>
+          </Row>
+        </Container>
+      </React.Fragment>
     </div>
   );
 };
 
-export default AdminDashboard;
+export default UnapprovedProducts;

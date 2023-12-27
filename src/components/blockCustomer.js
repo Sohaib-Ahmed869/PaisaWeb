@@ -1,11 +1,14 @@
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 import React, { useEffect, useState } from 'react';
-import { Button, Table } from 'react-bootstrap';
+import { Button, Col, Container, Form, InputGroup, Row, Table } from 'react-bootstrap';
+import { BiSearch } from 'react-icons/bi'; // Import the search icon
+
 
 const URL = process.env.REACT_APP_BACKEND_URL;
 
 const BlockCustomer = () => {
   const [customers, setCustomers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchCustomers = async () => {
@@ -58,39 +61,74 @@ const BlockCustomer = () => {
     }
   };
 
+  // Filter customers based on search term
+  const filteredCustomers = customers.filter((customer) =>
+    customer.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <div>
-      <h2>Customer List</h2>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th style={{ width: '120px'}}>Status</th>
-            <th style={{ width: '150px' }}>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {customers.map((customer) => (
-            <tr key={customer._id}>
-              <td>{customer.name}</td>
-              <td>{customer.email}</td>
-              <td style={{ color: customer.block ? 'red' : 'green' ,fontWeight:'bolder', paddingTop:'12px'}}>
-                {customer.block ? 'Blocked' : 'Not Blocked'}
-              </td>
-              <td>
-                <Button style={{ width: '100px' }}
-                  variant={customer.block ? 'primary' : 'primary'}
-                  onClick={() => handleBlockStatusChange(customer._id, !customer.block)}
-                >
-                  {customer.block ? 'Unblock' : 'Block'}
+    <React.Fragment>
+      <Container style={{ marginTop: '50px' }}>
+        <Row className="justify-content-md-center">
+          
+          <Col lg={8}>
+          
+              <div className="home-content mt-5">
+                <h1 className="title">Customer List</h1>
+                <p className="subtitle">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              </div>
+              {/* Search bar */}
+            
+             <Form  >
+             <InputGroup>
+                <Form.Control
+                  type="text"
+                  placeholder="Search by customer name"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                 <Button variant="outline-secondary">
+                  <BiSearch /> {/* Search icon */}
                 </Button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-    </div>
+                   </InputGroup>
+              </Form>
+             
+          
+              
+              <Table striped bordered hover style={{marginTop:'1px'}}>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th style={{ width: '120px' }}>Status</th>
+                    <th style={{ width: '150px' }}>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredCustomers.map((customer) => (
+                    <tr key={customer._id}>
+                      <td>{customer.name}</td>
+                      <td>{customer.email}</td>
+                      <td style={{ color: customer.block ? 'red' : 'green', fontWeight: 'bolder', paddingTop: '12px' }}>
+                        {customer.block ? 'Blocked' : 'Not Blocked'}
+                      </td>
+                      <td>
+                        <Button style={{ width: '100px' }}
+                          variant={customer.block ? 'primary' : 'primary'}
+                          onClick={() => handleBlockStatusChange(customer._id, !customer.block)}
+                        >
+                          {customer.block ? 'Unblock' : 'Block'}
+                        </Button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+       
+          </Col>
+        </Row>
+      </Container>
+    </React.Fragment>
   );
 };
 

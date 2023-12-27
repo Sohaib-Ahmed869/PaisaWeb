@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useEffect, useState } from 'react';
-import { Button, Table } from 'react-bootstrap';
+import { Button, Col, Container, Row, Table } from 'react-bootstrap';
 
 const URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -59,8 +59,19 @@ const BlockSeller = () => {
   };
 
   return (
-    <div>
-      <h2>Seller List</h2>
+    <React.Fragment>
+<Container style={{marginTop:'50px'}}>
+  <Row>
+  <Col  lg={1}>
+          
+          </Col>
+    <Col lg={8}>
+ 
+    <div className='signup-form mt-4'>
+          <div className="home-content mt-5">
+            <h1 className="title">Seller List</h1>
+            <p className="subtitle">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+          </div>
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -88,7 +99,16 @@ const BlockSeller = () => {
           ))}
         </tbody>
       </Table>
-    </div>
+      </div>
+
+    </Col>
+  </Row>
+
+</Container>
+
+    </React.Fragment>
+    
+    
   );
 };
 

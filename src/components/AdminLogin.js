@@ -12,7 +12,7 @@ const AdminLogin = () => {
     const submitHandler = async (e) => {
         e.preventDefault();
         console.log(password, email);
-
+    
         try {
             const response = await fetch(`${URL}/user/signin/admin`, {
                 method: 'POST',
@@ -24,16 +24,17 @@ const AdminLogin = () => {
                     email,
                 }),
             });
-
+    
             const responseData = await response.json();
             console.log(responseData);
-
+    
             if (response.ok) {
-                // Save token in local storage
+                // Save token and adminId in local storage
                 localStorage.setItem('token', responseData.token);
-                
+                localStorage.setItem('adminId', responseData.result._id); // Assuming the admin ID is in the result
+               
                 // Use navigate to go to the admin dashboard
-                navigate('/unapproved-products');
+                navigate('/admin-dashboard');
             } else {
                 console.error('Login failed:', responseData.error);
             }
