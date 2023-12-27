@@ -19,7 +19,7 @@ const EditProduct = () => {
 
     console.log(product);
 
-    const [quantity, setQuantity] = useState(product.qty);
+    const [quantity, setQuantity] = useState(product.quantity);
     const [discount, setDiscount] = useState(product.discount);
 
 
@@ -85,7 +85,10 @@ const EditProduct = () => {
                     <Row className="product-detail">
                         <Col lg={6}>
                             <div className="product-detail-img">
-                                <img src={product.image} alt="product" />
+                                <img
+                                    src={`data:${product.images[0].contentType};base64,${product.images[0].data}`}
+                                    style={{ maxWidth: '300px', maxHeight: '300px', margin: '5px' }}
+                                />
                             </div>
                         </Col>
                         <Col lg={6}>
@@ -93,7 +96,7 @@ const EditProduct = () => {
                                 <h1 className="title">{product.name}</h1>
                                 <p className="subtitle">{product.description}</p>
                                 <p className="price">Price: {product.price}</p>
-                                <p className="price">Quantity: {product.qty}</p>
+                                <p className="price">Quantity: {product.quantity}</p>
                                 <p className="price">Discount: {product.discount}</p>
                                 <p className="price">Category: {product.category}</p>
                                 <p className="price">Status: {product.active ? 'Active' : 'Inactive'}</p>

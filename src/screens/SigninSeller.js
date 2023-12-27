@@ -16,6 +16,7 @@ const Signin = () => {
     const [email, setEmail] = useState('');
 
     const submitHandler = async (e) => {
+        e.preventDefault();
         console.log (password, email);
         try {
             
@@ -33,6 +34,9 @@ const Signin = () => {
             console.log(responseData);
             //save token in local storage
             localStorage.setItem('token', responseData.token);
+
+            //redirect to dashboard
+            window.location.href = "/sellerdashboard";
 
         }
         catch (err) {
