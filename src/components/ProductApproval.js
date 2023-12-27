@@ -4,13 +4,14 @@ import { Button, Col, Container, Row, Table } from 'react-bootstrap';
 const URL = process.env.REACT_APP_BACKEND_URL;
 
 const UnapprovedProducts = () => {
+  const [allProducts, setAllProducts] = useState([]);
   const [unapprovedProducts, setUnapprovedProducts] = useState([]);
   const token = localStorage.getItem('token');
 
   useEffect(() => {
-    const fetchUnapprovedProducts = async () => {
+    const fetchAllProducts = async () => {
       try {
-        const response = await fetch(`${URL}/admin/unapproved-products`, {
+        const response = await fetch(`${URL}/admin/all-products`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -20,17 +21,20 @@ const UnapprovedProducts = () => {
 
         if (response.ok) {
           const data = await response.json();
-          setUnapprovedProducts(data);
+          setAllProducts(data);
+          // Filter unapproved products
+          const unapproved = data.filter((product) => !product.approval);
+          setUnapprovedProducts(unapproved);
         } else {
-          console.error('Failed to fetch unapproved products');
+          console.error('Failed to fetch all products');
           console.log(await response.text());
         }
       } catch (error) {
-        console.error('Error fetching unapproved products:', error);
+        console.error('Error fetching all products:', error);
       }
     };
 
-    fetchUnapprovedProducts();
+    fetchAllProducts();
   }, []);
 
   const handleApproveClick = async (productId) => {
@@ -66,8 +70,8 @@ const UnapprovedProducts = () => {
           <Row>
             <Col md={8} lg={8}></Col>
             <Col md={8} style={{ marginTop: '50px' }}>
-              <h2>Unapproved Products</h2>
-              {unapprovedProducts.length === 0 ? (
+              <h2>All Products</h2>
+              {allProducts.length === 0 ? (
                 <p>No products</p>
               ) : (
                 <Table striped bordered hover>
@@ -79,20 +83,24 @@ const UnapprovedProducts = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {unapprovedProducts.map((product) => (
+                    {allProducts.map((product) => (
                       <tr key={product._id}>
                         <td>{product.name}</td>
                         <td>
                           {product.approval ? 'Approved' : 'Not Approved'}
                         </td>
-                        <td>
-                          <Button
-                            variant="success"
-                            onClick={() => handleApproveClick(product._id)}
-                          >
-                            Approve
-                          </Button>
-                        </td>
+                        {product.approval ? (
+                          <td> Approved</td>
+                        ) : (
+                          <td>
+                            <Button
+                              variant="success"
+                              onClick={() => handleApproveClick(product._id)}
+                            >
+                              Approve
+                            </Button>
+                          </td>
+                        )}
                       </tr>
                     ))}
                   </tbody>
