@@ -110,6 +110,11 @@ const AddProduct = () => {
                         const imageResponseData = await imageResponse.json();
                         console.log(imageResponseData);
                         console.log(imageResponseData.success);
+
+
+                        //add image to frontend public folder
+                        
+
                     } catch (imageError) {
                         console.log(imageError);
                         console.log('Error in uploading image');

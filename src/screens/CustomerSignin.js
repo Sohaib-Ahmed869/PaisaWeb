@@ -10,16 +10,17 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Autoplay } from "swiper";
 
 const URL = process.env.REACT_APP_BACKEND_URL;
-const Signin = () => {
+const CustSignin = () => {
 
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
 
     const submitHandler = async (e) => {
+        e.preventDefault();
         console.log (password, email);
         try {
             
-            const response = await fetch(`${URL}/user/signin/seller`, {
+            const response = await fetch(`${URL}/user/signin/customer`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -80,7 +81,7 @@ const Signin = () => {
                                         <button type="submit" className="btn btn-primary" onClick={submitHandler}>Sign In</button>
                                     </Col>
                                     <Col lg={12}>
-                                        <p className="text-center">Don't have an account? <Link to="/signup" className="text-decoration-none">Sign Up</Link></p>
+                                        <p className="text-center">Don't have an account? <Link to="/customer/signup" className="text-decoration-none">Sign Up</Link></p>
                                     </Col>
                                 </Row>
                             </form>
@@ -92,4 +93,4 @@ const Signin = () => {
     );
 }
 
-export default Signin;
+export default CustSignin;
