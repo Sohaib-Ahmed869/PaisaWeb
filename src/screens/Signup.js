@@ -23,6 +23,7 @@ const Signup = () => {
     const [type, setType] = useState('');
 
     const submitHandler = async (e) => {
+        e.preventDefault();
         console.log('Type', type)
         console.log(name, email, password, confirm_password, dob, type);
         try {

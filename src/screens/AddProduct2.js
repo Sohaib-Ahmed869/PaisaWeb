@@ -29,17 +29,18 @@ const AddProduct2 = () => {
 
     const getCategories = async () => {
         try {
-            const response = await fetch(`${URL}/admin/getCategories`, {
+            const response = await fetch(`${URL}/admin/all-categories`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
                 },
             });
 
+
             const responseData = await response.json();
             console.log(responseData);
-            setCategories(responseData.categories);
-            setCategory(responseData.categories[0].name);
+            setCategories(responseData);
+
         } catch (err) {
             console.log(err);
         }

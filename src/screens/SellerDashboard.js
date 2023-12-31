@@ -150,33 +150,7 @@ const SellerDashboard = () => {
         setOrderPage(page);
     };
 
-    const productsPagination = (
-        <Pagination>
-            {[...Array(Math.ceil(products.length / productsPerPage)).keys()].map(page => (
-                <Pagination.Item
-                    key={page + 1}
-                    active={page + 1 === productPage}
-                    onClick={() => handleProductPageChange(page + 1)}
-                >
-                    {page + 1}
-                </Pagination.Item>
-            ))}
-        </Pagination>
-    );
 
-    const ordersPagination = (
-        <Pagination>
-            {[...Array(Math.ceil(orders.length / ordersPerPage)).keys()].map(page => (
-                <Pagination.Item
-                    key={page + 1}
-                    active={page + 1 === orderPage}
-                    onClick={() => handleOrderPageChange(page + 1)}
-                >
-                    {page + 1}
-                </Pagination.Item>
-            ))}
-        </Pagination>
-    );
 
     return (
         <React.Fragment>
@@ -208,7 +182,10 @@ const SellerDashboard = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {products.slice((productPage - 1) * productsPerPage, productPage * productsPerPage).map((product, index) => (
+
+                                        {
+                                            products && 
+                                        products.map((product, index) => (
                                             <tr key={index}>
                                                 <td>
                                                     {product.images.map((image, imgIndex) => (
@@ -235,9 +212,10 @@ const SellerDashboard = () => {
                                                 <td>{product.active ? <button className="btn btn-danger" onClick={() => deActivateProduct(product.name)}>Deactivate</button> : <button className="btn btn-success" onClick={() => activateProduct(product.name)}>Activate</button>}</td>
                                             </tr>
                                         ))}
+                                     
                                     </tbody>
                                 </table>
-                                {productsPagination}
+
                             </div>
                         </Col>
                     </Row>
@@ -256,7 +234,7 @@ const SellerDashboard = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {orders.slice((orderPage - 1) * ordersPerPage, orderPage * ordersPerPage).map((order, index) => (
+                                        {orders.map((order) => (
                                             <tr>
                                                 <td>{order._id}</td>
                                                 <td>{order.customerName}</td>
@@ -273,7 +251,7 @@ const SellerDashboard = () => {
                                         ))}
                                     </tbody>
                                 </table>
-                                {ordersPagination}
+  
                             </div>
                         </Col>
                     </Row>

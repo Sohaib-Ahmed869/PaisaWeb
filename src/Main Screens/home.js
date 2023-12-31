@@ -22,6 +22,7 @@ import jacket2 from "../assets/jacket2.png";
 import shirt1 from "../assets/shirt1.png";
 
 const Home = () => {
+    
     return (
         <React.Fragment>
             <DefaultNavbar />

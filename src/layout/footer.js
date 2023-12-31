@@ -127,7 +127,7 @@ const Footer = () => {
                     <Row className="justify-content-center">
                         <Col lg={6}>
                             <p className="mb-0 text-center text-muted">
-                                © {new Date().getFullYear()} Paisa.PK designed with<i className="mdi mdi-heart text-danger"></i> by
+                                © {new Date().getFullYear()} Paisa.PK designed by
                                 Sohaib, Fatima, Yousuf and Saif
                             </p>
                         </Col>

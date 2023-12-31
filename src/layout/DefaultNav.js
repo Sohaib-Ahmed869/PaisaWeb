@@ -14,6 +14,11 @@ import logoDark from "../images/logo.png";
 
 const DefaultNavbar = () => {
 
+    const navigateToSigin = () => {
+        window.location.href = "/signin/customer";
+    }
+    
+
     const [activeItem, setActiveItem] = useState('Home');
 
     const [navClass, setnavClass] = useState("");
@@ -123,7 +128,8 @@ const DefaultNavbar = () => {
                                 </li>
                             </ul>
                             <div className="ms-auto">
-                                <Link to="#" className="btn bg-gradiant">Login</Link>
+                                <Link to="/signin/customer"
+                                 className="btn bg-gradiant">Login</Link>
                             </div>
                         </div>
                     </Container>
