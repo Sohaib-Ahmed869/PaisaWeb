@@ -1,6 +1,7 @@
-
+// AdminProfile.js
 import React, { useEffect, useState } from 'react';
-import { Alert, Button, Card, Col, Container, Form, Row } from 'react-bootstrap'; // Import Alert from react-bootstrap
+import { Alert, Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
+//import AdminNav from '../layout/AdminNav';
 
 const AdminProfile = () => {
   const [admin, setAdmin] = useState({});
@@ -10,14 +11,13 @@ const AdminProfile = () => {
     password: '',
     dob: '',
   });
-  const [successMessage, setSuccessMessage] = useState('');
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   useEffect(() => {
     // Fetch admin profile data
     const fetchAdminProfile = async () => {
       try {
         const adminId = localStorage.getItem('adminId');
-
         const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/admin/profile/${adminId}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -30,7 +30,6 @@ const AdminProfile = () => {
         console.error('Error fetching admin profile:', error);
       }
     };
-
     fetchAdminProfile();
   }, []);
 
@@ -45,6 +44,7 @@ const AdminProfile = () => {
     e.preventDefault();
 
     try {
+      // Update admin profile
       const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/admin/edit-profile/${admin._id}`, {
         method: 'PUT',
         headers: {
@@ -55,21 +55,19 @@ const AdminProfile = () => {
       });
 
       if (response.ok) {
-        const updatedAdmin = await response.json();
-        setAdmin(updatedAdmin);
-        setSuccessMessage('Profile updated successfully'); // Set success message
-      } else {
-        console.error('Failed to update admin profile');
-        setSuccessMessage(''); // Clear success message
+        setShowSuccessMessage(true);
       }
+
+      const updatedAdmin = await response.json();
+      setAdmin(updatedAdmin);
     } catch (error) {
       console.error('Error updating admin profile:', error);
-      setSuccessMessage(''); // Clear success message
     }
   };
 
   return (
     <Container className="mt-4">
+     
       <Row className="justify-content-md-center">
         <Col lg={4} style={{ marginTop: '40px' }}>
           <div className="home-content mt-4">
@@ -80,50 +78,54 @@ const AdminProfile = () => {
         <Col md={8}>
           <Card>
             <Card.Body>
-              {successMessage && <Alert variant="success">{successMessage}</Alert>} {/* Display success message */}
+              {showSuccessMessage && (
+                <Alert variant="success" onClose={() => setShowSuccessMessage(false)} dismissible>
+                  Profile updated successfully!
+                </Alert>
+              )}
               <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="formName">
-                  <Form.Label>Name</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter your name"
-                    name="name"
-                    value={formData.name || admin.name}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
+              <Form.Group className="mb-3" controlId="formName">
+  <Form.Label>Name</Form.Label>
+  <Form.Control
+    type="text"
+    placeholder="Enter your name"
+    name="name"
+    value={formData.name || admin.name}
+    onChange={handleChange}
+  />
+</Form.Group>
 
-                <Form.Group className="mb-3" controlId="formEmail">
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control
-                    type="email"
-                    placeholder="Enter your email"
-                    name="email"
-                    value={formData.email || admin.email}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
+<Form.Group className="mb-3" controlId="formEmail">
+  <Form.Label>Email</Form.Label>
+  <Form.Control
+    type="email"
+    placeholder="Enter your email"
+    name="email"
+    value={formData.email || admin.email}
+    onChange={handleChange}
+  />
+</Form.Group>
 
-                <Form.Group className="mb-3" controlId="formPassword">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    placeholder="Enter your password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
+<Form.Group className="mb-3" controlId="formPassword">
+  <Form.Label>Password</Form.Label>
+  <Form.Control
+    type="password"
+    placeholder="Enter your password"
+    name="password"
+    value={formData.password}
+    onChange={handleChange}
+  />
+</Form.Group>
 
-                <Form.Group className="mb-3" controlId="formDob">
-                  <Form.Label>Date of Birth</Form.Label>
-                  <Form.Control
-                    type="date"
-                    name="dob"
-                    value={formData.dob || (admin.dob && admin.dob.substring(0, 10))}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
+<Form.Group className="mb-3" controlId="formDob">
+  <Form.Label>Date of Birth</Form.Label>
+  <Form.Control
+    type="date"
+    name="dob"
+    value={formData.dob || (admin.dob && admin.dob.substring(0, 10))}
+    onChange={handleChange}
+  />
+</Form.Group>
                 <Button variant="primary" type="submit">
                   Update Profile
                 </Button>

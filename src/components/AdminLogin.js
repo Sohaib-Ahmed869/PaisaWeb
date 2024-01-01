@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 const URL = process.env.REACT_APP_BACKEND_URL;
 
 const AdminLogin = () => {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
-    const navigate = useNavigate(); // Initialize the navigate function
-
+    
     const submitHandler = async (e) => {
         e.preventDefault();
         console.log(password, email);
@@ -31,10 +29,11 @@ const AdminLogin = () => {
             if (response.ok) {
                 // Save token and adminId in local storage
                 localStorage.setItem('token', responseData.token);
-                localStorage.setItem('adminId', responseData.result._id); // Assuming the admin ID is in the result
+                localStorage.setItem('adminId', responseData.admin._id); // Assuming the admin ID is in the result
                
-                // Use navigate to go to the admin dashboard
-                navigate('/admin-dashboard');
+                // Redirect to dashboard
+                window.location.href = '/admin-dashboard';
+                
             } else {
                 console.error('Login failed:', responseData.error);
             }
