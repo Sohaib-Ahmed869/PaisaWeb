@@ -34,7 +34,7 @@ const SuperAdminLogin = () => {
                 window.location.href = '/superadmin';
                 
             } else {
-                console.error('Login failed:', responseData.error);
+                alert(responseData.error);
             }
         } catch (err) {
             console.error(err, 'error');

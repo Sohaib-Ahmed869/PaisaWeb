@@ -43,9 +43,6 @@ const Home = () => {
                                 <p className="text-muted">The fashion world is at your fingertips.
                                     Get the most out of your shopping experience with the Paisa.PK app. Enjoy exclusive app-only offers and discounts, and hassle-free payment options.
                                 </p>
-                                <div className="btns-group mb-25">
-                                    <button to="#" className="btn bg-gradiant">Visit Site</button>
-                                </div>
                             </div>
                         </Col>
                         <Col md={6}>

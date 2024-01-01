@@ -6,8 +6,6 @@ import {
 } from 'react-bootstrap';
 
 import { Link } from 'react-router-dom';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectCoverflow, Autoplay } from "swiper";
 
 const URL = process.env.REACT_APP_BACKEND_URL;
 const Signin = () => {
@@ -35,6 +33,13 @@ const Signin = () => {
             //save token in local storage
             localStorage.setItem('token', responseData.token);
 
+            //if not ok then alert
+            if (!response.ok) {
+                alert(responseData.error);
+                return;
+            }
+
+
             //redirect to dashboard
             window.location.href = "/sellerdashboard";
 
@@ -52,7 +57,7 @@ const Signin = () => {
                     <Col lg={4}>
                         <div className="home-content mt-4">
                             <h1 className="title">Sign In</h1>
-                            <p className="subtitle">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                            <p className="subtitle">Enter your store now</p>
                         </div>
                     </Col>
                     <Col lg={8}>

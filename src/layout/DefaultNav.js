@@ -26,7 +26,14 @@ const DefaultNavbar = () => {
     //check if token exists
     useEffect(() => {
         const token = localStorage.getItem('token');
+        console.log(token);
+        if(token == null || token === '') {
+            console.log('token does not exist');
+            setTokenExists(false);
+            return;
+        }
         if (token) {
+            console.log('token exists');
             setTokenExists(true);
             //get user type from token
             const tokenParts = token.split('.');
