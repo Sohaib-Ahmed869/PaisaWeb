@@ -17,7 +17,27 @@ const DefaultNavbar = () => {
     const navigateToSigin = () => {
         window.location.href = "/signin/customer";
     }
-    
+
+    const [tokenExists, setTokenExists] = useState(false);
+
+    const [userType, setUserType] = useState('');
+
+
+    //check if token exists
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            setTokenExists(true);
+            //get user type from token
+            const tokenParts = token.split('.');
+            const encodedPayload = tokenParts[1];
+            const rawPayload = atob(encodedPayload);
+            const user = JSON.parse(rawPayload);
+            setUserType(user.type);
+            console.log(userType);
+        }
+    }
+        , []);
 
     const [activeItem, setActiveItem] = useState('Home');
 
@@ -51,51 +71,14 @@ const DefaultNavbar = () => {
     return (
         <React.Fragment>
             <div data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="61" data-bs-smooth-scroll="true" className="scrollspy-example-2">
-                <section className="tagline d-none d-md-block">
-                    <Container fluid>
-                        <Row className="align-items-center">
-                            <Col md={6}>
-                                <div className="d-flex">
-                                    <div className="phone">
-                                        <i className="mdi mdi-phone"></i>  +92 333 56 26 720
-                                    </div>
-                                    <div className="email ms-3">
-                                        <Link to="mailto:#" className="text-dark">
-                                            <i className="mdi mdi-email-open-outline"></i> paisapk@gmail.com
-                                        </Link>
-                                    </div>
-                                </div>
-                            </Col>
-                            <Col md={6}>
-                                <ul className="top_socials d-flex list-unstyled justify-content-end mb-0">
-                                    <li className="entry">
-                                        <Link to="#">
-                                            <i className="bx bxl-facebook-circle"></i>
-                                        </Link>
-                                    </li>
-                                    <li className="entry">
-                                        <Link to="#">
-                                            <i className="bx bxl-dribbble"></i>
-                                        </Link>
-                                    </li>
-                                    <li className="entry">
-                                        <Link to="#">
-                                            <i className="bx bxl-instagram"></i>
-                                        </Link>
-                                    </li>
-                                </ul>
-                            </Col>
-                        </Row>
-                        <div className="clear"></div>
-                    </Container>
-                </section>
+
 
                 <nav className={`navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-light ${navClass}`}
                     id="navbar">
                     <Container fluid>
                         <Navbar.Brand href="index-1.html" className="logo text-uppercase">
-                            <img src={logoLight} className="logo-light" alt="" height="30" />
-                            <img src={logoDark} className="logo-dark" alt="" height="30" />
+                            <img src={logoLight} className="logo-light" alt="" height="100" />
+                            <img src={logoDark} className="logo-dark" alt="" height="100" />
                         </Navbar.Brand>
 
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
@@ -108,29 +91,34 @@ const DefaultNavbar = () => {
                                 <li className={activeItem === 'Home' ? 'active' : 'nav-item'} onClick={() => setActiveItem('Home')} >
                                     <Nav.Link href="#home">Home</Nav.Link>
                                 </li>
-                                <li className={activeItem === 'About Us' ? 'active' : 'nav-item'} onClick={() => setActiveItem('About Us')}>
-                                    <Nav.Link href="#about">About Us</Nav.Link>
-                                </li>
                                 <li className={activeItem === 'Features' ? 'active' : 'nav-item'} onClick={() => setActiveItem('Features')}>
                                     <Nav.Link href="#features">Features</Nav.Link>
-                                </li>
-                                <li className={activeItem === 'Pricing' ? 'active' : 'nav-item'} onClick={() => setActiveItem('Pricing')}>
-                                    <Nav.Link href="#pricing">Pricing</Nav.Link>
-                                </li>
-                                <li className={activeItem === 'Application' ? 'active' : 'nav-item'} onClick={() => setActiveItem('Application')}>
-                                    <Nav.Link href="#app">Application</Nav.Link>
-                                </li>
-                                <li className={activeItem === 'Team' ? 'active' : 'nav-item'} onClick={() => setActiveItem('Team')}>
-                                    <Nav.Link href="#team">Team</Nav.Link>
                                 </li>
                                 <li className={activeItem === 'Contact' ? 'active' : 'nav-item'} onClick={() => setActiveItem('Contact')}>
                                     <Nav.Link href="#contact">Contact</Nav.Link>
                                 </li>
                             </ul>
                             <div className="ms-auto">
-                                <Link to="/signin/customer"
-                                 className="btn bg-gradiant">Login</Link>
+                                {tokenExists ? (
+                                    userType === 'Customer' ? (
+                                        <Link to="/customer" className="btn bg-gradiant" style={{ marginRight: '10px' }}>Dashboard</Link>
+                                    ) : userType === 'admin' ? (
+                                        <Link to="/admin-dashboard" className="btn bg-gradiant" style={{ marginRight: '10px' }}>Dashboard</Link>
+                                    ) : userType === 'Seller' ? (
+                                        <Link to="/sellerdashboard" className="btn bg-gradiant" style={{ marginRight: '10px' }}>Dashboard</Link>
+                                    ): userType === 'SuperAdmin' ? (
+                                        <Link to="/superadmin/" className="btn bg-gradiant" style={{ marginRight: '10px' }}>Dashboard</Link>
+                                    )  
+                                    : null
+                                ) : (
+                                    <Link to="/signin/customer" className="btn bg-gradiant" style={{ marginRight: '10px' }}>Login</Link>
+                                )}
+
+                                <Link to="/signup" className="btn bg-gradiant">Sign up</Link>
                             </div>
+
+
+
                         </div>
                     </Container>
                 </nav>

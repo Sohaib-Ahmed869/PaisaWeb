@@ -51,51 +51,13 @@ const SellerNavbar = () => {
     return (
         <React.Fragment>
             <div data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="61" data-bs-smooth-scroll="true" className="scrollspy-example-2">
-                <section className="tagline d-none d-md-block">
-                    <Container fluid>
-                        <Row className="align-items-center">
-                            <Col md={6}>
-                                <div className="d-flex">
-                                    <div className="phone">
-                                        <i className="mdi mdi-phone"></i>  +92 333 5626720
-                                    </div>
-                                    <div className="email ms-3">
-                                        <Link to="mailto:#" className="text-dark">
-                                            <i className="mdi mdi-email-open-outline"></i> paisapk@gmail.com
-                                        </Link>
-                                    </div>
-                                </div>
-                            </Col>
-                            <Col md={6}>
-                                <ul className="top_socials d-flex list-unstyled justify-content-end mb-0">
-                                    <li className="entry">
-                                        <Link to="#">
-                                            <i className="bx bxl-facebook-circle"></i>
-                                        </Link>
-                                    </li>
-                                    <li className="entry">
-                                        <Link to="#">
-                                            <i className="bx bxl-dribbble"></i>
-                                        </Link>
-                                    </li>
-                                    <li className="entry">
-                                        <Link to="#">
-                                            <i className="bx bxl-instagram"></i>
-                                        </Link>
-                                    </li>
-                                </ul>
-                            </Col>
-                        </Row>
-                        <div className="clear"></div>
-                    </Container>
-                </section>
-
+                
                 <nav className={`navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-light ${navClass}`}
                     id="navbar">
                     <Container fluid>
                         <Navbar.Brand href="index-1.html" className="logo text-uppercase">
-                            <img src={logoLight} className="logo-light" alt="" height="30" />
-                            <img src={logoDark} className="logo-dark" alt="" height="30" />
+                            <img src={logoLight} className="logo-light" alt="" height="100" />
+                            <img src={logoDark} className="logo-dark" alt="" height="100" />
                         </Navbar.Brand>
 
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
@@ -118,9 +80,6 @@ const SellerNavbar = () => {
                                     <Nav.Link href="#" onClick={logout}>Logout</Nav.Link>
                                 </li>
                             </ul>
-                            <div className="ms-auto">
-                                <Link to="#" className="btn bg-gradiant">Login</Link>
-                            </div>
                         </div>
                     </Container>
                 </nav>

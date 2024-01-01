@@ -76,7 +76,7 @@ const BlockCustomer = () => {
           
               <div className="home-content mt-5">
                 <h1 className="title">Customer List</h1>
-                <p className="subtitle">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                <p className="subtitle">List of customers</p>
               </div>
               {/* Search bar */}
             

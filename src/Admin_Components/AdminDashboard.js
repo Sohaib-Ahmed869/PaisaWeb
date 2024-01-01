@@ -63,7 +63,7 @@ const AdminDashboard = () => {
     const ordersByMonthData = {};
 
     for (const order of ordersData) {
-      const orderDate = new Date(order.orderDate);
+      const orderDate = new Date(order.order_date);
       const month = orderDate.getMonth();
       const year = orderDate.getFullYear();
       const key = `${year}-${month + 1}`; // Adding 1 because getMonth() returns 0-based month

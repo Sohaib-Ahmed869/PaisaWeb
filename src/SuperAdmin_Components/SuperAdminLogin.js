@@ -31,7 +31,7 @@ const SuperAdminLogin = () => {
                 // Save token and adminId in local storage
                 localStorage.setItem('token', responseData.token);
                 // Redirect to dashboard
-                window.location.href = '/superadmin/superAdminLanding';
+                window.location.href = '/superadmin';
                 
             } else {
                 console.error('Login failed:', responseData.error);
@@ -48,7 +48,7 @@ const SuperAdminLogin = () => {
                     <Col lg={4}>
                         <div className="home-content mt-4">
                             <h1 className="title">Sign In</h1>
-                            <p className="subtitle">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                            <p className="subtitle">Welcome to Paisa pk</p>
                         </div>
                     </Col>
                     <Col lg={8}>

@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProductDetail from './ProductDetails.js';
-import { BrowserRouter as Router,Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import './Home.css';
 
 // Bootstrap
@@ -88,14 +88,18 @@ const Home2 = ({ cart, setCart, setIsCartVisible }) => {
     const onSignupClick = () => {
         window.location.href = "/customer/signup";
     }
-    
+
+    const logout = () => {
+        localStorage.removeItem('token');
+        window.location.href = "/";
+    }
 
     useEffect(() => {
         fetchProducts();
     }, []);
 
     return (
-        <div className='home-1'>
+        <React.Fragment>
             <Navbar className="bg-body-tertiary text-dark" expand="lg" sticky="top">
                 <Container fluid>
                     <Navbar.Brand href="#">Paisa PK</Navbar.Brand>
@@ -120,86 +124,93 @@ const Home2 = ({ cart, setCart, setIsCartVisible }) => {
                         <Link className='CartLink' to="/cart" onClick={() => setIsCartVisible(true)} style={{ marginRight: '1rem' }}>
                             Cart ({cart.length})
                         </Link>
-                        
+
                         <Form className="d-flex">
                             <Button variant="outline-success"
-                            className='mr-2 btn btn-primary'
-                            style={{marginRight: '1rem'}}
-                            onClick={onDesignClick}
+                                className='mr-2 btn btn-primary'
+                                style={{ marginRight: '1rem' }}
+                                onClick={onDesignClick}
                             >Design</Button>
-
                             <Button variant="outline-success"
-                            className='mr-2 btn btn-primary'
-                            style={{marginRight: '1rem'}}
-                            onClick={onSignupClick}
+                                className='mr-2 btn btn-primary'
+                                style={{ marginRight: '1rem' }}
+                                onClick={logout}
+                            >Logout</Button>
+                            <Button variant="outline-success"
+                                className='mr-2 btn btn-primary'
+                                style={{ marginRight: '1rem' }}
+                                onClick={onSignupClick}
                             >Sign Up</Button>
                             <Button variant="outline-success"
-                            className='mr-2 btn btn-primary'
-                            onClick={onSigninClick}
+                                className='mr-2 btn btn-primary'
+                                onClick={onSigninClick}
                             >Sign In</Button>
                         </Form>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            <Carousel>
-                <Carousel.Item>
-                    <ExampleCarouselImage text="First slide" />
-                    <Carousel.Caption>
-                        <h3>First slide label</h3>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                    </Carousel.Caption>
-                </Carousel.Item>
-                <Carousel.Item>
-                    <ExampleCarouselImage text="Second slide" />
-                    <Carousel.Caption>
-                        <h3>Second slide label</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </Carousel.Caption>
-                </Carousel.Item>
-                <Carousel.Item>
-                    <ExampleCarouselImage text="Third slide" />
-                    <Carousel.Caption>
-                        <h3>Third slide label</h3>
-                        <p>
-                            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-                        </p>
-                    </Carousel.Caption>
-                </Carousel.Item>
-            </Carousel>
-            <Row className="justify-content-center">
-                            <Col lg={12}>
-                                <div className="sec-hd">
-                                    <span className="heading"></span>
-                                    <h2 className="sec-title mt-4">Adverisement Management</h2>
-                                    <span className="heading"></span>
-                                </div>
-                            </Col>
-           </Row>
-            <div className="product-list" style={{ display: 'flex', flexWrap: 'wrap' }}>
-                {products.map((product, index) => (
-                    <div key={product._id} className="product-card shadow-sm p-3 mb-5 bg-body rounded hover-shadow-lg border border-3 text-center text-dark"
-                    style={{ width: '18rem', margin: '1rem' }}>
-                        <img src={`data:${product.img.contentType};base64,${product.img.data}`} alt={product.name} style = {{width: '10rem', height: '10rem'}}/>
-                        <h2>{product.name}</h2>
-                        <p>{product.description}</p>
-                        <p>Price: ${product.price}</p>
-                        <button className="btn btn-primary"
-                            onClick={() => addToCart(product._id, index)}
-                            disabled={clickedProducts[index]}
-                        >
-                            {clickedProducts[index] ? 'Added to Cart' : 'Add to Cart'}
-                        </button>
-                    </div>
-                ))}
-            </div>
-            <Router>
-                <Switch
-                    path="/cart"
-                    component={<CartPage cart={cart} updateCart={updateCart} />}
-                />
-            </Router>
-            <Footer />
-        </div>
+            <section className='home-1' style={{ marginTop: '-5rem' }}>
+
+                <Carousel>
+                    <Carousel.Item>
+                        <ExampleCarouselImage text="First slide" />
+                        <Carousel.Caption>
+                            <h3>First slide label</h3>
+                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <ExampleCarouselImage text="Second slide" />
+                        <Carousel.Caption>
+                            <h3>Second slide label</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <ExampleCarouselImage text="Third slide" />
+                        <Carousel.Caption>
+                            <h3>Third slide label</h3>
+                            <p>
+                                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+                            </p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                </Carousel>
+                <Row className="justify-content-center">
+                    <Col lg={12}>
+                        <div className="sec-hd">
+                            <span className="heading"></span>
+                            <h2 className="sec-title mt-4">Adverisement Management</h2>
+                            <span className="heading"></span>
+                        </div>
+                    </Col>
+                </Row>
+                <div className="product-list" style={{ display: 'flex', flexWrap: 'wrap' }}>
+                    {products.map((product, index) => (
+                        <div key={product._id} className="product-card shadow-sm p-3 mb-5 bg-body rounded hover-shadow-lg border border-3 text-center text-dark"
+                            style={{ width: '18rem', margin: '1rem' }}>
+                            <img src={`data:${product.img.contentType};base64,${product.img.data}`} alt={product.name} style={{ width: '10rem', height: '10rem' }} />
+                            <h2>{product.name}</h2>
+                            <p>{product.description}</p>
+                            <p>Price: ${product.price}</p>
+                            <button className="btn btn-primary"
+                                onClick={() => addToCart(product._id, index)}
+                                disabled={clickedProducts[index]}
+                            >
+                                {clickedProducts[index] ? 'Added to Cart' : 'Add to Cart'}
+                            </button>
+                        </div>
+                    ))}
+                </div>
+                <Router>
+                    <Switch
+                        path="/cart"
+                        component={<CartPage cart={cart} updateCart={updateCart} />}
+                    />
+                </Router>
+                <Footer />
+            </section>
+        </React.Fragment>
     );
 };
 

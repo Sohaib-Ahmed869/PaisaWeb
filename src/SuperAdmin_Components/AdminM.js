@@ -31,6 +31,12 @@ const AdminLanding = () => {
     window.location.href = '/superadmin/socialMedia'; // Replace with the actual path
   }
 
+  const logout = () => {
+    localStorage.removeItem('token');
+    window.location.href = "/";
+  }
+
+
 
 
   return (
@@ -131,6 +137,22 @@ const AdminLanding = () => {
                     onClick={() => { socialMedia() }}
                   >
                     Social Media Management
+                  </Button>
+                </div>
+              </div>
+              <div className="features-box mt-5">
+                <div className="features-icon float-start me-2">
+                  <i className="uil uil-share-alt"></i>
+                </div>
+                <div className="ps-3 ms-5">
+                  <h5 className="f-15 text-uppercase">
+                    Logout
+                  </h5>
+                  <Button
+                    className={classNames('button', 'mt-3')}
+                    onClick={() => { logout() }}
+                  >
+                    Logout
                   </Button>
                 </div>
               </div>

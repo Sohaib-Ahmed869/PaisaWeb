@@ -62,7 +62,7 @@ const BlockSeller = () => {
     <React.Fragment>
       <AdminNav />
       <Container style={{ marginTop: '50px' }}>
-        <Row>
+        <Row className="justify-content-md-center">
           <Col lg={1}>
 
           </Col>
@@ -71,7 +71,7 @@ const BlockSeller = () => {
             <div className='signup-form mt-4'>
               <div className="home-content mt-5">
                 <h1 className="title">Seller List</h1>
-                <p className="subtitle">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                <p className="subtitle">List of your sellers</p>
               </div>
               <Table striped bordered hover>
                 <thead>

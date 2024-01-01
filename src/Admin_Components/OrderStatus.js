@@ -12,6 +12,7 @@ const OrderStatus = () => {
   const [products, setProducts] = useState({});
   const [searchTerm, setSearchTerm] = useState('');
 
+  const [status, setStatus] = useState('');
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -45,6 +46,7 @@ const OrderStatus = () => {
           const productsData = await productsResponse.json();
 
           setOrders(ordersData);
+          console.log(ordersData);
           setCustomers(customersData.reduce((acc, customer) => {
             acc[customer._id] = customer.name;
             return acc;
@@ -53,6 +55,7 @@ const OrderStatus = () => {
             acc[product._id] = product.name;
             return acc;
           }, {}));
+          console.log(productsData);
         } else {
           console.error('Failed to fetch orders, customers, or products');
         }
@@ -81,6 +84,7 @@ const OrderStatus = () => {
             order._id === orderId ? { ...order, orderStatus: newOrderStatus } : order
           )
         );
+        console.log(orders);
       } else {
         console.error('Failed to update order status');
       }
@@ -89,9 +93,24 @@ const OrderStatus = () => {
     }
   };
 
-  const filteredOrders = orders.filter((order) =>
-    customers[order.customer].toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const [filteredOrders, setFilteredOrders] = useState([]);
+
+  const onChange = (e) => {
+    setSearchTerm(e.target.value);
+    if(orders.length == 0){
+      return;
+    }
+    if (orders.length != 0) {
+      setFilteredOrders(orders.filter((order) =>
+        customers[order.customer].toLowerCase().includes(searchTerm.toLowerCase())
+      )
+      );
+    }
+
+  }
+
+
+
 
   return (
     <React.Fragment>
@@ -99,51 +118,42 @@ const OrderStatus = () => {
       <Container style={{ marginTop: '50px' }}>
         <Row>
           <h2 style={{ marginLeft: '-10px' }}>Manage Orders</h2>
-          <Form className="mb-4" style={{}}>
-            <InputGroup>
-            <Form.Control
-                type="text"
-                placeholder="Search by customer name"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              
-                <Button variant="outline-secondary">
-                  <BiSearch /> {/* Search icon */}
-                </Button>
-            </InputGroup>
-             
-             
-           
-          </Form>
+
           <Table striped bordered hover>
             <thead>
               <tr>
                 <th>Order ID</th>
                 <th>Customer</th>
-                <th>Products</th>
                 <th>Order Status</th>
-                <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              {filteredOrders.map((order) => (
-                <tr key={order._id}>
-                  <td>{order._id}</td>
-                  <td>{customers[order.customer]}</td>
-                  <td>{order.products.map((productId) => products[productId]).join(', ')}</td>
-                  <td>{order.orderStatus ? 'Confirmed' : 'Pending'}</td>
-                  <td>
-                    <Button
-                      variant={order.orderStatus ? 'success' : 'primary'}
-                      onClick={() => handleOrderStatusChange(order._id, !order.orderStatus)}
-                      disabled={order.orderStatus}
-                    >
-                      Confirm
-                    </Button>
-                  </td>
-                </tr>
-              ))}
+              {orders.length === 0 && <tr><td colSpan="5">No orders</td></tr>}
+
+
+              {
+                orders.length > 0 &&
+
+                orders.map((order) => (
+                  <tr key={order._id}>
+                    <td>{order._id}</td>
+                    <td>{order.customerName}</td>
+                    <td>
+                      <select 
+                      className="form-control"
+                      
+                      onChange={(e) => handleOrderStatusChange(order._id, e.target.value)}
+                      >
+                        <option>{order.status}</option>
+                        <option>Pending</option>
+                        <option>Confirmed</option>
+                        <option>Cancelled</option>
+                        <option>Delivered</option>
+                      </select>
+                    </td>
+
+                  </tr>
+                ))}
             </tbody>
           </Table>
         </Row>

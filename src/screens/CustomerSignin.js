@@ -36,7 +36,12 @@ const CustSignin = () => {
             //save token in local storage
             localStorage.setItem('token', responseData.token);
 
-            if(responseData){
+            //if not ok then alert
+            if (!response.ok) {
+                alert(responseData.error);
+            }
+
+            if(response.ok){
                 window.location.href = '/customer/';
             }
 

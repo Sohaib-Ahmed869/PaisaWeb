@@ -158,13 +158,13 @@ const SellerDashboard = () => {
             <section id="home" style={{ textAlign: 'left', paddingTop: '100px' }}>
                 <Container>
                     <Row className="align-items-center">
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <div className="home-content mt-4">
                                 <h1 className="title">Seller Dashboard</h1>
-                                <p className="subtitle">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                <p className="subtitle">Welcome to your Store</p>
                             </div>
                         </Col>
-                        <Col lg={8}>
+                        <Col lg={12}>
                             <div className="signup-form mt-4">
                                 <Link to="/addProduct2" className="btn btn-primary">Add Product</Link>
                                 <table className="table mt-4">
@@ -219,42 +219,7 @@ const SellerDashboard = () => {
                             </div>
                         </Col>
                     </Row>
-                    <Row className="mt-5">
-                        <Col lg={12}>
-                            <div className="signup-form mt-4">
-                                <h1 className="title">Orders</h1>
-                                <table className="table mt-4">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Order ID</th>
-                                            <th scope="col">Customer Name</th>
-                                            <th scope="col">Total Price</th>
-                                            <th scope="col">Status</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {orders.map((order) => (
-                                            <tr>
-                                                <td>{order._id}</td>
-                                                <td>{order.customerName}</td>
-                                                <td>$ {order.price}</td>
-                                                <td>
-                                                    <select className="form-control" id={order._id} onChange={updateOrderStatus} value={order.status}>
-                                                        <option value="Pending">Pending</option>
-                                                        <option value="Confirmed">Confirmed</option>
-                                                        <option value="Delivered">Delivered</option>
-                                                        <option value="Cancelled">Cancelled</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-  
-                            </div>
-                        </Col>
-                    </Row>
+                   
                 </Container>
             </section>
         </React.Fragment>

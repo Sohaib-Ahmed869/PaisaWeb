@@ -16,7 +16,6 @@ import AdminDashboard from '../Admin_Components/AdminDashboard';
 import AdminProfile from '../Admin_Components/AdminProfile';
 import BlockSeller from '../Admin_Components/BlockSeller';
 import CategoriesPage from '../Admin_Components/Categories';
-import CustomerHeader from '../Admin_Components/CustomerHeader';
 import OrderStatus from '../Admin_Components/OrderStatus';
 import ProductApproval from '../Admin_Components/ProductApproval';
 import BlockCustomer from '../Admin_Components/blockCustomer';

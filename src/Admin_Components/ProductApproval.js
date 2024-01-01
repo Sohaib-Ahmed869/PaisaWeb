@@ -63,8 +63,8 @@ const UnapprovedProducts = () => {
     <div>
       <React.Fragment>
         <AdminNav />
-        <Container>
-          <Row>
+        <Container style={{ marginTop: '50px' }}>
+          <Row className="justify-content-md-center">
             <Col md={8} lg={8}></Col>
             <Col md={8} style={{ marginTop: '50px' }}>
               <h2>Unapproved Products</h2>

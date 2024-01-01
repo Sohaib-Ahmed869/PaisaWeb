@@ -50,15 +50,15 @@ const AdminNav = () => {
 
     return (
         <React.Fragment>
-            <div data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="61" data-bs-smooth-scroll="true" className="scrollspy-example-2">
+            <div data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="61" data-bs-smooth-scroll="true" className="scrollspy-example-2 pb-5" style={{ marginBottom: '50px'}}>
 
 
-                <nav className={`navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-light ${navClass}`}
+                <nav className={`navbar navbar-expand-lg fixed-top navbar-custom`}
                     id="navbar">
                     <Container fluid>
                         <Navbar.Brand href="index-1.html" className="logo text-uppercase">
-                            <img src={logoLight} className="logo-light" alt="" height="30" />
-                            <img src={logoDark} className="logo-dark" alt="" height="30" />
+                            <img src={logoLight} className="logo-light" alt="" height="100" />
+                            <img src={logoDark} className="logo-dark" alt="" height="100" />
                         </Navbar.Brand>
 
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
@@ -70,6 +70,9 @@ const AdminNav = () => {
                             <ul className="navbar-nav ms-auto" id="navbar-navlist">
                                 <li>
                                     <Nav.Link href="/admin-dashboard">Admin Dashboard</Nav.Link>
+                                </li>
+                                <li>
+                                    <Nav.Link href="/admin/pending-orders">Order Status</Nav.Link>
                                 </li>
                                 <li>
                                     <Nav.Link href="/admin/unapproved-products">Approve Products</Nav.Link>
@@ -93,9 +96,6 @@ const AdminNav = () => {
                                     <Nav.Link href="#" onClick={logout}>Logout</Nav.Link>
                                 </li>
                             </ul>
-                            <div className="ms-auto">
-                                <Link to="#" className="btn bg-gradiant">Login</Link>
-                            </div>
                         </div>
                     </Container>
                 </nav>

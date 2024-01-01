@@ -97,19 +97,7 @@ const Footer = () => {
                                     <Nav.Link href="#home">Home</Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item className="list-inline-item">
-                                    <Nav.Link href="#about">About Us</Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item className="list-inline-item">
                                     <Nav.Link href="#features">Features</Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item className="list-inline-item">
-                                    <Nav.Link href="#pricing">Pricing</Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item className="list-inline-item">
-                                    <Nav.Link href="#app">Application</Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item className="list-inline-item">
-                                    <Nav.Link href="#team">Team</Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item className="list-inline-item">
                                     <Nav.Link href="#contact">Contact</Nav.Link>
@@ -127,8 +115,7 @@ const Footer = () => {
                     <Row className="justify-content-center">
                         <Col lg={6}>
                             <p className="mb-0 text-center text-muted">
-                                © {new Date().getFullYear()} Paisa.PK designed by
-                                Sohaib, Fatima, Yousuf and Saif
+                                © {new Date().getFullYear()} Paisa.PK
                             </p>
                         </Col>
                     </Row>
