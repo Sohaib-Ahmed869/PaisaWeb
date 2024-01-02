@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from 'react-bootstrap';
-
+import SellerNav from '../layout/SellerNav';
 const URL = process.env.REACT_APP_BACKEND_URL;
 
 const AddProduct2 = () => {
@@ -67,6 +67,8 @@ const AddProduct2 = () => {
             const productData = await productResponse.json();
             console.log(productData);
 
+            
+
             if (productData) {
                 alert('Product Added Successfully');
                 console.log('File selected');
@@ -114,6 +116,7 @@ const AddProduct2 = () => {
 
     return (
         <React.Fragment>
+            <SellerNav />
             <section id="home" style={{ textAlign: 'left', paddingTop: '100px' }}>
                 <Container>
                     <Row className="align-items-center">

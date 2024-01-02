@@ -34,6 +34,14 @@ const CustomerSignup = () => {
 
             const responseData = await response.json();
             console.log(responseData);
+
+            if(response.ok) {
+                // Redirect to dashboard
+                window.location.href = '/signin/customer';
+            }
+            else {
+                alert('Sign up failed');
+            }
         }
         catch (err) {
             console.log(err);

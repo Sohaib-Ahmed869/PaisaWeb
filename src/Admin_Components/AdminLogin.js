@@ -50,7 +50,6 @@ const AdminLogin = () => {
                     <Col lg={4}>
                         <div className="home-content mt-4">
                             <h1 className="title">Sign In</h1>
-                            <p className="subtitle">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                         </div>
                     </Col>
                     <Col lg={8}>
