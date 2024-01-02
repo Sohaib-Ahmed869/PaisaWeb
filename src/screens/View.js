@@ -100,7 +100,6 @@ const SellerDesign =() => {
                                             <Card.Text>
                                                 <img src={`data:${design.image.contentType};base64,${design.image}`} alt="Design" className="img-fluid" />
                                             </Card.Text>
-                                            <Button variant="top" onClick={() => deleteDesign(design.customer_name)}>Delete</Button>
                                         </Card.Body>
                                     </Card>
                                 </div>
