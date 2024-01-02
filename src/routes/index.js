@@ -20,7 +20,7 @@ import OrderStatus from '../Admin_Components/OrderStatus';
 import ProductApproval from '../Admin_Components/ProductApproval';
 import BlockCustomer from '../Admin_Components/blockCustomer';
 import Advertisement from '../SuperAdmin_Components/Adverisement';
-
+import UpdateProfile from '../screens/updateProfile';
 // ---------------------------SUPER ADMIN---------------------------------
 import AdminManagement from '../SuperAdmin_Components/AdminManagement';
 import ViewBlockedAdmin from '../SuperAdmin_Components/ViewBlockedAdmin';
@@ -64,6 +64,7 @@ const Routerss = () => {
                     <Route path="/addproduct2" component={AddProduct2} />
                     <Route path="/sellerdashboard" component={SellerDashboard} />
                     <Route path="/editProduct" component={EditProduct} />
+                    <Route path="/seller/updateProfile" component={UpdateProfile} />
                     {/* ---------------------------CUSTOMER---------------------------------*/}
                     <Route path="/signin/customer" component={CustSignin} />
 

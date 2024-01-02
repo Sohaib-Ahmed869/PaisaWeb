@@ -74,6 +74,10 @@ const SellerNavbar = () => {
                                     <Nav.Link href="/addproduct2">Add Product</Nav.Link>
                                 </li>
                                 <li>
+                                    <Nav.Link href="/seller/updateProfile">Update Profile</Nav.Link>
+                                </li>
+                                <li>
+                                
                                     {/*
                                     logout
                                     */}

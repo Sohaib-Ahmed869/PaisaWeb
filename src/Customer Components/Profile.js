@@ -6,6 +6,7 @@ import './Profile.css';
 import ProfileEmail from './ProfileEmail.js';
 import Button from 'react-bootstrap/Button';
 
+const URL = process.env.REACT_APP_BACKEND_URL;
 const Profile = () => {
     // State to store customer profile information
     const [customerProfile, setCustomerProfile] = useState({});
@@ -19,7 +20,7 @@ const Profile = () => {
         // Fetch customer profile information from the server
         const fetchCustomerProfile = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/customers/${customerId}`);
+                const response = await axios.get(`${URL}/customers/${customerId}`);
                 setCustomerProfile(response.data);
             } catch (error) {
                 console.error('Error fetching customer profile:', error);

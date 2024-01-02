@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+const URL = process.env.REACT_APP_BACKEND_URL;
 const ProductDetail = ({ match }) => {
   const [product, setProduct] = useState(null);
   console.log(match);
@@ -11,7 +12,7 @@ const ProductDetail = ({ match }) => {
   
     const fetchProduct = async () => {
       try {
-          const response = await axios.get(`http://localhost:3000/api/products/${match.params.id}`);
+          const response = await axios.get(`${URL}/products/${match.params.id}`);
           setProduct(response.data);
       } catch (error) {
           console.error('Error fetching product details:', error.message);

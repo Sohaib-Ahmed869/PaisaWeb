@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
-import { Link} from 'react-router-dom';
-import AdminNav from '../layout/AdminNav';
+import { Col, Container, Navbar, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 const URL = process.env.REACT_APP_BACKEND_URL;
 
 const AdminLogin = () => {
@@ -30,7 +29,7 @@ const AdminLogin = () => {
             if (response.ok) {
                 // Save token and adminId in local storage
                 localStorage.setItem('token', responseData.token);
-                localStorage.setItem('adminId', responseData._id); // Assuming the admin ID is in the result
+                localStorage.setItem('adminId', responseData.admin._id); // Assuming the admin ID is in the result
                
                 // Redirect to dashboard
                 window.location.href = '/admin-dashboard';
@@ -45,6 +44,7 @@ const AdminLogin = () => {
 
     return (
         <React.Fragment>
+          
             <Container>
                 <Row className="align-items-center">
                     <Col lg={4}>

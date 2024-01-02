@@ -120,7 +120,7 @@ const AddProduct2 = () => {
                         <Col lg={4}>
                             <div className="home-content mt-4">
                                 <h1 className="title">Add Product</h1>
-                                <p className="subtitle">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                <p className="subtitle">Add a new product to your store.</p>
                             </div>
                         </Col>
                         <Col lg={8}>

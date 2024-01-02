@@ -4,13 +4,13 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './CartPage.css';
 import Button from 'react-bootstrap/Button';
-
+const URL = process.env.REACT_APP_BACKEND_URL;
 const CartPage = ({ cart, setUpdateCart }) => {
     const [cartProducts, setCartProducts] = useState([]);
 
     const fetchProductById = async (productId) => {
         try {
-            const response = await axios.get(`http://localhost:3001/customer/products/${productId}`);
+            const response = await axios.get(`${URL}/customer/products/${productId}`);
             return response.data;
         } catch (error) {
             console.error(`Error fetching product with ID ${productId}:`, error.message);

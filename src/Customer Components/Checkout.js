@@ -7,7 +7,7 @@ import './CartPage.css';
 import { clearCart } from './Action.js';
 import CheckoutForm from './CheckoutForm.js';
 import Button from 'react-bootstrap/Button';
-
+const URL = process.env.REACT_APP_BACKEND_URL;
 const Checkout = ({ cart, setCartVisible }) => {
     const dispatch = useDispatch();
     const [cartProducts, setCartProducts] = useState([]);
@@ -21,7 +21,7 @@ const Checkout = ({ cart, setCartVisible }) => {
 
         const fetchProductById = async (productId) => {
             try {
-                const response = await axios.get(`http://localhost:3001/customer/products/${productId}`);
+                const response = await axios.get(`${URL}/customer/products/${productId}`);
                 return response.data;
             } catch (error) {
                 console.error(`Error fetching product with ID ${productId}:`, error.message);
@@ -41,7 +41,7 @@ const Checkout = ({ cart, setCartVisible }) => {
     const handleCheckout = async () => {
         try {
             // Assuming /orders endpoint is correct on your server
-            const response = await axios.post('http://localhost:3001/customer/placeorder', {
+            const response = await axios.post(`${URL}/customer/placeorder`, {
                 customer: '659051ca99a9466bb2558126', // Replace with the actual customer ID
                 customerName: 'Sohaib', // Replace with the actual customer ID
                 products: [...cartProducts.map((product) => product.name)],

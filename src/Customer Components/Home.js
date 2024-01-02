@@ -1,10 +1,12 @@
 // Home.js
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProductDetail from './ProductDetails.js';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
+
 import './Home.css';
 
 // Bootstrap
@@ -54,7 +56,9 @@ const Home2 = ({ cart, setCart, setIsCartVisible }) => {
 
     const fetchProducts = async () => {
         try {
-            const response = await axios.get('http://localhost:3001/customer/products');
+
+            const URL = process.env.REACT_APP_BACKEND_URL;
+            const response = await axios.get(`${URL}/customer/products`);
             setProducts(response.data.products);
             console.log('Products:', response.data);
             // Initialize clickedProducts array with the same length as products, all set to false
