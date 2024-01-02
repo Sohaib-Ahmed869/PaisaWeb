@@ -77,6 +77,9 @@ const SellerNavbar = () => {
                                     <Nav.Link href="/seller/updateProfile">Update Profile</Nav.Link>
                                 </li>
                                 <li>
+                                    <Nav.Link href="/seller/view">View Designs</Nav.Link>
+                                </li>
+                                <li>
                                 
                                     {/*
                                     logout

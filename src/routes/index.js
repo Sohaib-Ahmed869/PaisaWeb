@@ -39,7 +39,7 @@ import ProductDetail from '../Customer Components/ProductDetails';
 import Checkout from '../Customer Components/Checkout';
 import Profile from '../Customer Components/Profile';
 import Store from '../Customer Components/Store';
-
+import SellerDesign from '../screens/View';
 import { Provider } from 'react-redux';
 
 
@@ -65,6 +65,7 @@ const Routerss = () => {
                     <Route path="/sellerdashboard" component={SellerDashboard} />
                     <Route path="/editProduct" component={EditProduct} />
                     <Route path="/seller/updateProfile" component={UpdateProfile} />
+                    <Route path="/seller/view" component={SellerDesign} />
                     {/* ---------------------------CUSTOMER---------------------------------*/}
                     <Route path="/signin/customer" component={CustSignin} />
 
