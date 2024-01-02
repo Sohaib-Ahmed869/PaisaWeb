@@ -20,7 +20,7 @@ const Signup = () => {
     const [password, setPassword] = useState('');
     const [confirm_password, setConfirmPassword] = useState('');
     const [dob, setDob] = useState('');
-    const [type, setType] = useState('');
+    const [type, setType] = useState('Admin');
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -40,6 +40,19 @@ const Signup = () => {
 
             const responseData = await response.json();
             console.log(responseData);
+
+            alert('Sign up successful');    
+            if(response.ok) {
+                // Redirect to dashboard
+                
+                window.location.href = '/signin/customer';
+            }
+            else {
+                alert('Sign up failed');
+                console.error('Sign up failed:', responseData.error);
+            }
+
+
         }
         catch (err) {
             console.log(err);

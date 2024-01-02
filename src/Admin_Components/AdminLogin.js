@@ -27,7 +27,7 @@ const AdminLogin = () => {
             console.log(responseData);
     
             if (response.ok) {
-                // Save token and adminId in local storage
+
                 localStorage.setItem('token', responseData.token);
                 localStorage.setItem('adminId', responseData.admin._id); // Assuming the admin ID is in the result
                
