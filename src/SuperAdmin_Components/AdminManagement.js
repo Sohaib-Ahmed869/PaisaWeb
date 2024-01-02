@@ -72,7 +72,7 @@ const AdminPage = () => {
               <Col lg={12}>
                 <div className="sec-hd">
                   <span className="heading"></span>
-                  <h2 className="sec-title mt-4">Adverisement Management</h2>
+                  <h2 className="sec-title mt-4">Admin Management</h2>
                   <span className="heading"></span>
                 </div>
               </Col>
