@@ -121,7 +121,7 @@ const DefaultNavbar = () => {
                                     <Link to="/signin/customer" className="btn bg-gradiant" style={{ marginRight: '10px' }}>Login</Link>
                                 )}
 
-                                <Link to="/signup" className="btn bg-gradiant">Sign up</Link>
+                                <Link to="/customer/signup" className="btn bg-gradiant">Sign up</Link>
                             </div>
 
 
